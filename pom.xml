@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.scalabb</groupId>
+ <artifactId>ValidatableForm</artifactId>
+ <packaging>jar</packaging>
+
+ <version>0.8</version>
+
+ <properties>
+  <!-- UTF-8 for everyone -->
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+  <!-- Other general properties -->
+  <slf4j-version>1.6.0</slf4j-version>
+  <logback-version>0.9.20</logback-version>
+  <scala-version>2.8.0.RC2</scala-version>
+  <scala-maven-plugin-version>2.13.1</scala-maven-plugin-version>
+  </properties>
+
+ <description>
+  Starting pom
+ </description>
+
+ <repositories>
+  <repository>
+   <id>scala-tools.org</id>
+   <name>Scala-tools Maven2 Repository</name>
+   <url>http://scala-tools.org/repo-releases</url>
+  </repository>
+  <repository>
+   <id>scala-snapshots.org</id>
+   <name>Scala-tools Maven2 Repository snapshots</name>
+   <url>http://scala-tools.org/repo-snapshots</url>
+  </repository>
+
+  <repository>
+   <id>no-commons-logging</id>
+   <name>No-commons-logging Maven Repository</name>
+   <layout>default</layout>
+   <url>http://no-commons-logging.zapto.org/mvn2</url>
+   <snapshots><enabled>false</enabled></snapshots>
+  </repository>
+
+ </repositories>
+
+ <pluginRepositories>
+  <pluginRepository>
+   <id>scala-tools.org</id>
+   <name>Scala-tools Maven2 Repository</name>
+   <url>http://scala-tools.org/repo-releases</url>
+   <snapshots><enabled>false</enabled></snapshots>
+  </pluginRepository>
+  <pluginRepository>
+   <id>scala-snapshots.org</id>
+   <name>Scala-tools Maven2 Repository snapshots</name>
+   <url>http://scala-tools.org/repo-snapshots</url>
+  </pluginRepository>
+ </pluginRepositories>
+
+ <build>
+  <sourceDirectory>src/main/scala</sourceDirectory>
+  <testSourceDirectory>src/test/scala</testSourceDirectory>
+  <plugins>
+   <plugin>
+    <groupId>org.scala-tools</groupId>
+    <artifactId>maven-scala-plugin</artifactId>
+    <version>${scala-maven-plugin-version}</version> 
+    <executions>
+     <execution>
+      <goals>
+       <goal>compile</goal>
+       <goal>testCompile</goal>
+      </goals>
+     </execution>
+    </executions>
+    <configuration>
+     <args>
+      <arg>-target:jvm-1.5</arg>
+      <arg>-make:transitivenocp</arg>
+      <arg>-dependencyfile</arg>
+      <arg>${project.build.directory}/.scala_dependencies</arg>
+     </args>
+     <jvmArgs>
+      <jvmArg>-client</jvmArg>
+      <jvmArg>-Xmx1G</jvmArg>
+     </jvmArgs>
+    </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>2.1</version>
+    <configuration>
+    <source>1.6</source>
+    </configuration>
+   </plugin>
+
+  </plugins>
+ </build>
+
+ <dependencies>
+  <dependency>
+   <groupId>org.scala-lang</groupId>
+   <artifactId>scala-library</artifactId>
+   <version>${scala-version}</version>
+  </dependency>
+  <dependency>
+   <groupId>joda-time</groupId>
+   <artifactId>joda-time</artifactId>
+   <version>1.6</version>
+  </dependency>
+  <!--  test -->
+  <dependency>
+   <groupId>junit</groupId>
+   <artifactId>junit</artifactId>
+   <version>4.7</version>
+   <scope>test</scope>
+  </dependency>
+
+    <dependency>
+          <groupId>com.octo.captcha</groupId>
+          <artifactId>jcaptcha-all</artifactId>
+          <version>1.0-RC4</version>
+      </dependency>
+      <dependency>
+      <groupId>org.scala-tools.testing</groupId>
+      <artifactId>specs</artifactId>
+      <version>1.6.1-2.8.0.Beta1-RC6</version> 
+      <scope>test</scope>
+    </dependency>
+  
+
+ </dependencies>
+</project>
