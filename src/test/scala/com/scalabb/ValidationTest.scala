@@ -25,7 +25,7 @@ package com.scalabb {
   object ValidationSpecs extends Specification {
 
     "Be Able to make a single element form with a required field and validate it" in {
-      val f = new ValidateableForm((e) => {}, "name" ->
+      val f = new ValidatableForm((e) => {}, "name" ->
         new ValidString(List(new MinLength(3), new Required)))
       f.submit(Map("name" -> "f"))
       assert(!f("name").isValid)
@@ -36,7 +36,7 @@ package com.scalabb {
       assert(f.isValid)
     }
     "Be Able to make a single element form with a non required field and validate it" in {
-      val f = new ValidateableForm((e) => {}, "name" ->
+      val f = new ValidatableForm((e) => {}, "name" ->
         new ValidString(List(new MinLength(3))))
       f.submit(Map("name" -> "f"))
       assert(!f("name").isValid)
@@ -56,7 +56,7 @@ package com.scalabb {
     }
 
     "Be Able to validate via regex" in {
-      val f = new ValidateableForm((e) => {}, "zipcode" ->
+      val f = new ValidatableForm((e) => {}, "zipcode" ->
         new ValidString(List(new ValidRegex("^([0-9]{5})$"), new Required)))
       f.submit(Map("zipcode" -> "a12345"))
       assert(!f("zipcode").isValid)
@@ -64,7 +64,7 @@ package com.scalabb {
       assert(f("zipcode").isValid)
     }
     "Be Able to validate an integer field" in {
-      val f = new ValidateableForm((e) => {}, "quantity" ->
+      val f = new ValidatableForm((e) => {}, "quantity" ->
         new ValidInteger(List(new Minimum(1), new Maximum(10), new Required)))
       val n = "quantity";
       f.submit(Map(n -> "f"))
@@ -83,7 +83,7 @@ package com.scalabb {
       assert(f.isValid)
     }
     "Be able to perform form level validations" in {
-      val f = new ValidateableForm((e) => {},
+      val f = new ValidatableForm((e) => {},
         "password" ->
         new ValidString(List(new MinLength(6),
           new MaxLength(8),
@@ -122,7 +122,7 @@ package com.scalabb {
       assert(!f("password2").isValid)
     }
     "Be able to perform form host/port validations" in {
-      val f = new ValidateableForm((e) => {},
+      val f = new ValidatableForm((e) => {},
         "host" ->
         new ValidHostname(List(new Required)),
         "port" ->
