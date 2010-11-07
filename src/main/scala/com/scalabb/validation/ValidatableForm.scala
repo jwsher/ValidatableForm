@@ -27,13 +27,13 @@ case class FormError(v: Option[ValidField[_ <: Any]], defaultMsg: String, i18nCo
 
 
 /**
- * The abtract	 superclass for all validateable form fields
+ * The abtract	 superclass for all validatable form fields
  * @author Justin Sher (justin@sher.net)
  */
 abstract class ValidField[O](
   validators: List[Validator[O]]) {
 
-  var form: ValidateableForm = _
+  var form: ValidatableForm = _
   var parseExcetion: Exception = _
   def toModel: O
   var name: String = _
@@ -507,13 +507,13 @@ class MaxLength(maxLength: Int) extends Validator[String] {
  * This is the class that holds form fields as a group.  You create one of these and then validate your form data against it.
  * It handles mutli-field validation, for instance verifying that a password and a confirm password match
  */
-class ValidateableForm(handleErr: (List[FormError]) => Unit, formSpec: Tuple2[String, ValidField[_ <: Any]]*) {
+class ValidatableForm(handleErr: (List[FormError]) => Unit, formSpec: Tuple2[String, ValidField[_ <: Any]]*) {
   val formMap: Map[String, ValidField[_ <: Any]] = formSpec.toMap
   formSpec foreach ((k) => { k._2.form = this; k._2.name = k._1; })
 
-  var formValid: List[Validator[ValidateableForm]] = List()
+  var formValid: List[Validator[ValidatableForm]] = List()
   var errorFields: Iterable[(String, ValidField[_ <: Any])] = List()
-  var formErrorFields: Iterable[Validator[_ <: ValidateableForm]] = List()
+  var formErrorFields: Iterable[Validator[_ <: ValidatableForm]] = List()
 
   /**
    * Clear all form field values
@@ -525,7 +525,7 @@ class ValidateableForm(handleErr: (List[FormError]) => Unit, formSpec: Tuple2[St
 /**
  * Validations that apply to multiple form fields
  */
-  def formValidations(valid: Validator[ValidateableForm]*): ValidateableForm = {
+  def formValidations(valid: Validator[ValidatableForm]*): ValidatableForm = {
     formValid = valid.toList;
     return this
   }
@@ -584,8 +584,8 @@ class ValidateableForm(handleErr: (List[FormError]) => Unit, formSpec: Tuple2[St
  * @param fields list of fields that should all match
  * Form level validation to check if two fields in the form match
  */
-class FieldsMatch(fields: List[String]) extends Validator[ValidateableForm] {
-  def validate(obj: ValidateableForm): Boolean = {
+class FieldsMatch(fields: List[String]) extends Validator[ValidatableForm] {
+  def validate(obj: ValidatableForm): Boolean = {
     var field: Option[ValidField[_ <: Any]] = None
     for (f <- fields) {
       field match {
