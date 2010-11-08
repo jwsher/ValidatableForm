@@ -2,7 +2,7 @@
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
  <modelVersion>4.0.0</modelVersion>
  <groupId>com.scalabb</groupId>
- <artifactId>ValidatableForm</artifactId>
+ <artifactId>validatable-form</artifactId>
  <packaging>jar</packaging>
 
  <version>0.8</version>
@@ -19,7 +19,7 @@
   </properties>
 
  <description>
-  Starting pom
+  Validatable Form, a Scala library for validating web forms.
  </description>
 
  <repositories>
@@ -43,7 +43,16 @@
   </repository>
 
  </repositories>
-
+ <distributionManagement>
+	<repository>
+		<id>repo</id>
+		<url>http://github.com/jwsher/jwsher-mvn-repo/raw/master/releases</url>
+	</repository>
+	<snapshotRepository>
+		<id>snapshot-repo</id>
+		<url>http://github.com/jwsher/jwsher-mvn-repo/raw/master/snapshots</url>
+	</snapshotRepository>
+</distributionManagement>
  <pluginRepositories>
   <pluginRepository>
    <id>scala-tools.org</id>
@@ -105,11 +114,6 @@
    <artifactId>scala-library</artifactId>
    <version>${scala-version}</version>
   </dependency>
-  <dependency>
-   <groupId>joda-time</groupId>
-   <artifactId>joda-time</artifactId>
-   <version>1.6</version>
-  </dependency>
   <!--  test -->
   <dependency>
    <groupId>junit</groupId>
@@ -118,12 +122,7 @@
    <scope>test</scope>
   </dependency>
 
-    <dependency>
-          <groupId>com.octo.captcha</groupId>
-          <artifactId>jcaptcha-all</artifactId>
-          <version>1.0-RC4</version>
-      </dependency>
-      <dependency>
+   <dependency>
       <groupId>org.scala-tools.testing</groupId>
       <artifactId>specs</artifactId>
       <version>1.6.1-2.8.0.Beta1-RC6</version> 
@@ -132,4 +131,6 @@
   
 
  </dependencies>
+ 
+
 </project>
